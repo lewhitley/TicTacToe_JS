@@ -1,3 +1,7 @@
+.title {
+  text-align: center;
+}
+
 .square {
   outline: 5px solid black;
   width: 100px;
@@ -11,6 +15,10 @@
 
 li {
   float: left;
+  font-size: 70pt;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-align: center;
 }
 
 ul {
