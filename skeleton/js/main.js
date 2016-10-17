@@ -5,6 +5,6 @@ const game = new Game();
 
 $( () => {
   // Your code here
-  const view = new View(game, $("ttt"));
+  const view = new View(game, $(".ttt"));
   view.bindEvents();
 });

@@ -8,16 +8,42 @@ class View {
   bindEvents() {
     const $squares = $('li');
 
+    let enabled = true;
+
     $squares.on("click", event => {
-      const $square = $(event.currentTarget);
-      this.makeMove($square);
+      if (enabled) {
+        const $square = $(event.currentTarget);
+        this.makeMove($square);
+        if (this.game.isOver()) {
+          let $gameOver = $("<div>").addClass("message");
+          if (this.game.winner()) {
+            $gameOver.append(`${this.game.winner()} has won!`);
+          } else {
+            $gameOver.append('NO ONE WINS!');
+          }
+          $('figure').after($gameOver);
+          enabled = false;
+        } else {
+
+        }
+      } else {
+
+      }
     });
+
   }
 
   makeMove($square) {
-    $square.text(this.game.currentPlayer);
+    let text = this.game.currentPlayer;
     let pos = JSON.parse("["+$square.data('pos')+"]");
-    this.game.playMove(pos);
+    try {
+      this.game.playMove(pos);
+      $square.addClass('clicked');
+      $square.text(text);
+    }
+    catch(MoveError) {
+      alert(MoveError.msg);
+    }
   }
 
   setupBoard() {
@@ -26,15 +52,16 @@ class View {
       for (var j = 0; j < 3; j++) {
         let $square = $('<li>').addClass("square").attr("data-pos", [i, j]);
         $ul.append($square);
+
         $square.hover( ent => {
           const $square = $(ent.currentTarget);
-          $square.css("background-color", "yellow");
+          $square.addClass("hovered");
         }, out => {
           const $square = $(out.currentTarget);
-          $square.css("background-color", "gray");
+          $square.removeClass("hovered");
         });
       }
-      $("h1").after($ul);
+      this.$el.append($ul);
     }
   }
 }
