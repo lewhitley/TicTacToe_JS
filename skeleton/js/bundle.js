@@ -79,8 +79,12 @@
 	        if (this.game.isOver()) {
 	          let $gameOver = $("<div>").addClass("message");
 	          if (this.game.winner()) {
-	            $gameOver.append(`${this.game.winner()} has won!`);
+	            let winner = this.game.winner();
+	            $(`li`).addClass("loser");
+	            $(`li:contains(${winner})`).removeClass("loser").addClass("winner");
+	            $gameOver.append(`${winner} has won!`);
 	          } else {
+	            $(`li`).addClass("loser");
 	            $gameOver.append('NO ONE WINS!');
 	          }
 	          $('figure').after($gameOver);
