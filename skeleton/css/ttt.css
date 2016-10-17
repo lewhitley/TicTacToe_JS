@@ -1,0 +1,20 @@
+.square {
+  outline: 1px solid gray;
+  width: 100px;
+  height: 100px;
+  float: left;
+  transition: outline 0.5s, background-color 0.5s;
+  cursor: crosshair;
+  background-color: white;
+  list-style: none;
+}
+
+li {
+  float: left;
+}
+
+ul {
+  margin: 0px;
+  width: 300px;
+  padding: 0px;
+}
