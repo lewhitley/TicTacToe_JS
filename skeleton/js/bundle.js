@@ -72,9 +72,17 @@
 
 	  setupBoard() {
 	    for(let i = 0; i < 3; i ++) {
-	      let $ul = $(`<ul></ul>`).addClass("row");
+	      let $ul = $('<ul>').addClass("row");
 	      for (var j = 0; j < 3; j++) {
-	        $ul.append($(`<li>c${j}</li>`).addClass("square"));
+	        let $square = $('<li>').addClass("square");
+	        $ul.append($square);
+	        $square.mouseenter( (ent) => {
+	          const $square = $(ent.currentTarget);
+	          $square.css("background-color", "yellow");
+	        }).mouseleave( (out) => {
+	          const $square = $(out.currentTarget);
+	          $square.css("background-color", "gray");
+	        });
 	      }
 	      $("h1").after($ul);
 	    }
